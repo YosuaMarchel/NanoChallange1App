@@ -16,11 +16,6 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var profilePic: UIImageView!
-    @IBOutlet weak var question1Buble: UIView!
-    @IBOutlet weak var question2Buble: UIView!
-    @IBOutlet weak var question3Buble: UIView!
-    @IBOutlet weak var question4Buble: UIView!
-    @IBOutlet weak var question5Buble: UIView!
     @IBOutlet weak var buttonTrue1: UIButton!
     @IBOutlet weak var buttonFalse1: UIButton!
     @IBOutlet weak var buttonTrue2: UIButton!
@@ -33,16 +28,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonFalse5: UIButton!
     @IBOutlet weak var buttonRefresh: UIButton!
     @IBOutlet weak var buttonScore: UIButton!
-    @IBOutlet weak var imageBoy: UIImageView!
-    @IBOutlet weak var imageTextBuble: UIImageView!
-    @IBOutlet weak var text100: UILabel!
-    @IBOutlet weak var textGratz: UILabel!
-    @IBOutlet weak var textNoAswer: UILabel!
-    @IBOutlet weak var textPlay: UILabel!
-    @IBOutlet weak var imagePlayBuble: UIImageView!
     @IBOutlet weak var textScore: UILabel!
     @IBOutlet weak var textName: UILabel!
-    @IBOutlet weak var textNowYouKnow: UILabel!
+    @IBOutlet weak var textSuggestion: UILabel!
     
     //variables that used
     var randomNumber = Int.random(in: 0...11)
@@ -50,7 +38,7 @@ class ViewController: UIViewController {
     var temp = 0
     
     //database of the name and answer with array:
-    var allName = ["Fauzan","James","Nabila","Ajeng","Nixi","Yosua","Grace","Aga","Fadhil","Alldo","Anisa","Dimas"]
+    var allName = ["Fauzan","James","Nabila","Ajeng","Nixi","Yosua","Grace","Aga","Fadhil","Alldo","Anis","Dimas"]
     var allAnswer = [[true,true,true,false,false],[true,true,true,true,false],[true,false,false,true,false],[true,false,true,true,true],[true,false,false,true,false],[true,false,false,true,false],[true,false,false,true,true],[true,false,true,true,false],[true,true,true,false,false],[false,true,true,true,false],[true,true,false,true,false],[false,true,false,true,false]]
     var allPic = [#imageLiteral(resourceName: "picFauzan"),#imageLiteral(resourceName: "picJames"),#imageLiteral(resourceName: "picNabila"),#imageLiteral(resourceName: "picAjeng"),#imageLiteral(resourceName: "picNixi"),#imageLiteral(resourceName: "picYosua"),#imageLiteral(resourceName: "picGrace"),#imageLiteral(resourceName: "picAga"),#imageLiteral(resourceName: "picFadhil"),#imageLiteral(resourceName: "picAlldo"),#imageLiteral(resourceName: "picAnisa"),#imageLiteral(resourceName: "picDimas")]
     
@@ -58,42 +46,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //setting the bubble and picture to rounded
-        profilePic.layer.cornerRadius = profilePic.frame.size.width / 2
-        question1Buble.layer.cornerRadius = question1Buble.frame.size.width / 20
-        question2Buble.layer.cornerRadius = question1Buble.frame.size.width / 20
-        question3Buble.layer.cornerRadius = question1Buble.frame.size.width / 20
-        question4Buble.layer.cornerRadius = question1Buble.frame.size.width / 20
-        question5Buble.layer.cornerRadius = question1Buble.frame.size.width / 20
-        buttonRefresh.layer.cornerRadius = buttonRefresh.frame.size.width / 10
-        buttonScore.layer.cornerRadius = buttonScore.frame.size.width / 10
+        profilePic.layer.cornerRadius = 20
+        buttonRefresh.layer.cornerRadius = 10
+        buttonScore.layer.cornerRadius = 10
         
         //random change the picture when change person button pressed
         profilePic.image = allPic[randomNumber]
-//        if randomNumber == 0{
-//            profilePic.image = #imageLiteral(resourceName: "picFauzan")
-//        }else if randomNumber == 1{
-//            profilePic.image = #imageLiteral(resourceName: "picJames")
-//        }else if randomNumber == 2{
-//            profilePic.image = #imageLiteral(resourceName: "picNabila")
-//        }else if randomNumber == 3{
-//            profilePic.image = #imageLiteral(resourceName: "picAjeng")
-//        }else if randomNumber == 4{
-//            profilePic.image = #imageLiteral(resourceName: "picNixi")
-//        }else if randomNumber == 5{
-//            profilePic.image = #imageLiteral(resourceName: "picYosua")
-//        }else if randomNumber == 6{
-//            profilePic.image = #imageLiteral(resourceName: "picGrace")
-//        }else if randomNumber == 7{
-//            profilePic.image = #imageLiteral(resourceName: "picAga")
-//        }else if randomNumber == 8{
-//            profilePic.image = #imageLiteral(resourceName: "picFadhil")
-//        }else if randomNumber == 9{
-//            profilePic.image = #imageLiteral(resourceName: "picAlldo")
-//        }else if randomNumber == 10{
-//            profilePic.image = #imageLiteral(resourceName: "picAnisa")
-//        }else{
-//            profilePic.image = #imageLiteral(resourceName: "picDimas")
-//        }
+        textName.text = allName[randomNumber]
     }
     
     //refresh button func
@@ -119,17 +78,8 @@ class ViewController: UIViewController {
         buttonFalse4.isHighlighted = true
         buttonTrue5.isHighlighted = true
         buttonFalse5.isHighlighted = true
-        
-        //setting text and buble hidden
-        imageTextBuble.isHidden = true
-        imagePlayBuble.isHidden = false
-        text100.isHidden = true
-        textGratz.isHidden = true
-        textNoAswer.isHidden = true
-        textPlay.isHidden = false
         textScore.isHidden = true
-        textNowYouKnow.isHidden = true
-        textName.isHidden = true
+        textSuggestion.isHidden = true
     }
     
     //answer button func
@@ -162,27 +112,19 @@ class ViewController: UIViewController {
 
     //score button func
     @IBAction func resultButton(_ sender: Any) {
-        imageTextBuble.isHidden = false
-        imagePlayBuble.isHidden = true
-        textPlay.isHidden = true
-        
         //checking if all the answer is aswered
         if buttonTrue1.isHighlighted == buttonFalse1.isHighlighted{
-            textNoAswer.isHidden = false
             showAlertAnswer()
         }else if buttonTrue2.isHighlighted == buttonFalse2.isHighlighted{
-            textNoAswer.isHidden = false
             showAlertAnswer()
         }else if buttonTrue3.isHighlighted == buttonFalse3.isHighlighted{
-            textNoAswer.isHidden = false
             showAlertAnswer()
         }else if buttonTrue4.isHighlighted == buttonFalse4.isHighlighted{
-            textNoAswer.isHidden = false
             showAlertAnswer()
         }else if buttonTrue5.isHighlighted == buttonFalse5.isHighlighted{
-            textNoAswer.isHidden = false
             showAlertAnswer()
         }else{
+            //calculate the score
             if buttonTrue1.isHighlighted != allAnswer[randomNumber][0]{
                 score += 20
             }
@@ -198,24 +140,20 @@ class ViewController: UIViewController {
             if buttonTrue5.isHighlighted != allAnswer[randomNumber][4]{
                 score += 20
             }
-            textScore.text = "Your score : \(score)%"
             
-            if score != 100{
-                text100.isHidden = false
-                textGratz.isHidden = true
-                textNoAswer.isHidden = true
-                imagePlayBuble.isHidden = false
-                textScore.isHidden = false
-                textName.isHidden = true
-                textNowYouKnow.isHidden = true
+            //setting the sprite
+            textScore.text = "\(score)%"
+            textScore.isHidden = false
+            if score == 100{
+                let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbPopUpID") as! PopUpViewController
+                self.addChild(popOverVC)
+                popOverVC.view.frame = self.view.frame
+                self.view.addSubview(popOverVC.view)
+                popOverVC.didMove(toParent: self)
+                popOverVC.textName.text = allName[randomNumber]
+                textSuggestion.isHidden = true
             }else{
-                text100.isHidden = true
-                textGratz.isHidden = false
-                textNoAswer.isHidden = true
-                textScore.isHidden = true
-                textName.text = allName[randomNumber]
-                textName.isHidden = false
-                textNowYouKnow.isHidden = false
+                textSuggestion.isHidden = false
             }
             score = 0
         }
@@ -228,11 +166,5 @@ class ViewController: UIViewController {
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
-    //    func showAlertScore() {
-    //        let alert = UIAlertController(title: "Message", message: "Your score : \(score)%", preferredStyle: .alert)
-    //        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-    //        alert.addAction(action)
-    //        self.present(alert, animated: true, completion: nil)
-    //    }
 }
 
